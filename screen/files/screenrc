@@ -1,0 +1,13 @@
+bindkey "^[[5;3~" prev # move to previous window with alt + page up
+bindkey "^[[6;3~" next # move to next window with alt + page down
+
+backtick 1 5 5 /usr/bin/mem_usage
+
+# last line with some info
+
+# [%{G}%H] -> hostname enclosed by []
+# [%=%{= kw}%?%-Lw%?(%{W}%n*%f%t%?(%u)%?)%{w}%?%+Lw%?%?%=] -> show windows
+# [mem usage: %1`] -> show the output of backtick (memory usage)
+# %{y}[load: %l] -> cpu host load
+# %{W}[%{B}%c:%s %{W}%d/%M/%Y] -> date and time
+hardstatus alwayslastline '%{= kG}[%{G}%H][%=%{= kw}%?%-Lw%?(%{W}%n*%f%t%?(%u)%?)%{w}%?%+Lw%?%?%=]%{m}[mem usage: %1`]%{y}[load: %l]%{W}[%{B}%c:%s %{W}%d/%M/%Y]'

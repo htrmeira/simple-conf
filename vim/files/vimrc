@@ -67,15 +67,6 @@ set tabstop=2
 " Make tab insert indents instead of tabs at the beginning of a line
 set smarttab
 
-" Show line at column 100.
-set colorcolumn=100
-
-" Underline current line
-set cursorline
-
-" Sets the color of the line as lightgrey.
-highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
-
 " Remove whitespaces at end of line
 autocmd BufWritePre *.{java,py,c,cpp,C,cc,h,hpp,hh,H,rb,sh} :%s/\s\+$//e
 

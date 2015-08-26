@@ -1,3 +1,6 @@
+vbell off # Disables visual bell
+bell_msg ""
+
 bindkey "^[[5;3~" prev # move to previous window with alt + page up
 bindkey "^[[6;3~" next # move to next window with alt + page down
 

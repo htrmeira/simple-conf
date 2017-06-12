@@ -22,7 +22,7 @@ shopt -s checkwinsize
 
 case "$TERM" in
 	xterm*|rxvt*)
-		PS1='[\[\033[1;31m\]\u \[\033[0;36m\]\W\[\033[0m\] $(__git_ps1 " (\[\033[33m\]%s\[\033[m\])")\]]\$ '
+    PS1='[\[\033[1;31m\]\u \[\033[0;36m\]\W\[\033[0m\]$(__git_ps1 " (\[\033[33m\]%s\[\033[m\])")]\$ '
 		;;
 	*)
 		;;
@@ -40,3 +40,10 @@ alias ll='ls -G -lhat'
 alias la='ls -A'
 alias l='ls -CF'
 
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

@@ -67,6 +67,9 @@ set tabstop=2
 " Make tab insert indents instead of tabs at the beginning of a line
 set smarttab
 
+" To insert space characters instead of tab.
+set expandtab
+
 " Remove whitespaces at end of line
 autocmd BufWritePre *.{java,py,c,cpp,C,cc,h,hpp,hh,H,rb,sh} :%s/\s\+$//e
 

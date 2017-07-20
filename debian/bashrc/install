@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Install a new .bashrc, .profile and .functions inside
+# the home directory of the current user running this
+# script. Note that for the root user, a different set of
+# configurations will be used.
+
+CP="/bin/cp -rpv"
+
+install_config_files() {
+	local user_config_dir=$1
+
+	$CP $user_config_dir/bashrc $HOME/.bashrc
+
+	mkdir -p $HOME/.functions
+	$CP $user_config_dir/functions/* $HOME/.functions/
+}
+
+install_config() {
+	echo "Installing for user: $USER"
+	local username="user"
+
+	if [[ "$EUID" -eq "0" ]]; then
+        username="root"
+  fi
+  install_config_files "$(dirname $0)/$username"
+}
+
+main() {
+  case $1 in
+    -i | --install)
+  		shift;
+  		install_config $1;
+      ;;
+  	*)
+  		>&2 echo "-n | --name: for script name"
+  		exit 1;
+  esac
+}
+
+main $@

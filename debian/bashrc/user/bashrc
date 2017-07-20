@@ -1,0 +1,49 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+export HISTCONTROL=ignoreboth
+
+# Unlimited bash history
+export HISTFILESIZE=-1
+export HISTSIZE=-1
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+case "$TERM" in
+	xterm*|rxvt*)
+    PS1='[\[\033[1;34m\]\u@\h\[\033[0m\] \[\033[0;36m\]\W\[\033[0m\]$(__git_ps1 " (\[\033[33m\]%s\[\033[m\])")]\$ '
+		;;
+	*)
+		;;
+esac
+
+# New colors for ls commmand
+# export LSCOLORS=ExGxBxDxCxegedabagacad
+
+# Show star if git has changes to be commited
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+alias ls='ls --color=auto'
+alias grep='grep --color=always'
+alias ll='ls --color=auto -lhat'
+alias la='ls -A'
+alias l='ls -CF'
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

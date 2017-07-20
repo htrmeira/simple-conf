@@ -1,0 +1,72 @@
+#!/bin/bash
+
+# This is the script to manage all confiigurations under macbook
+# directory. This will try to find the projects under directories
+# where the current script is installed.
+#
+# In order to add new configurations you just need to add a new
+# directory here, in the root of this directory must exist a file
+# named 'install' that receives the parameters -i or --install.
+
+show_all_install_scripts() {
+  local current_dir=$(dirname $0)
+
+	for config_dir in `ls -d $current_dir/*/`; do
+		local install_file=$(echo $config_dir)
+
+		echo "-> $(basename $install_file)"
+	done
+}
+
+show_help() {
+	echo "-l | --list: to list all configuration to install"
+	echo "-i <config-name> | --install <config-name>: to list all configuration to install"
+}
+
+install_config() {
+	local config_name=$1;
+
+	if [[ -z $config_name ]]; then
+    >&2 echo "No config name given"
+		exit 1;
+	fi
+
+  local config_dir=$(dirname $0)/$config_name
+
+	if [[ ! -d $config_dir ]]; then
+    >&2 echo "The given configuration does not exists."
+		exit 1;
+	fi
+
+  echo "Installing... $config_name"
+
+  bash $config_dir/install --install
+
+	if [[ "$?" -gt "0" ]]; then
+    >&2 echo "erro while installing $config_name!"
+	fi
+
+	echo "Configuration for $config_name installed with success!"
+}
+
+main() {
+	case $1 in
+    -l | --list)
+      shift;
+      show_all_install_scripts;
+      ;;
+    -i | --install)
+			shift;
+      install_config $1;
+			;;
+    -h | --help)
+			shift;
+			show_help;
+      ;;
+    *)
+      >&2 echo "-h | --help: to list commands for this script"
+      exit 1;
+	esac
+}
+
+main $@
